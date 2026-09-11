@@ -3,7 +3,7 @@ resource "aws_security_group" "bastion" {
   description = "Acces SSH depuis le poste du stagiaire"
   vpc_id      = var.vpc_id
 
-  ingress {
+ ingress {
     description = "SSH depuis mon poste"
     from_port   = 22
     to_port     = 22
@@ -29,13 +29,13 @@ resource "aws_security_group" "prive" {
   description = "Acces SSH uniquement depuis le bastion"
   vpc_id      = var.vpc_id
 
-  ingress {
-    description     = "SSH depuis le bastion"
-    from_port       = 22
-    to_port         = 22
-    protocol        = "tcp"
-    security_groups = [aws_security_group.bastion.id]
-  }
+ ingress {
+   description     = "SSH depuis le bastion"
+   from_port       = 22
+   to_port         = 22
+   protocol        = "tcp"
+   security_groups = [aws_security_group.bastion.id]
+}
 
   egress {
     description = "Tout le trafic sortant"
